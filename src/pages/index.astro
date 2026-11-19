@@ -5,6 +5,35 @@ import SolidCard from '../components/solid/SolidCard';
 import VueCard from '../components/VueCard.vue';
 import SvelteCard from '../components/SvelteCard.svelte';
 import AlpineCard from '../components/AlpineCard.astro';
+import AstroReadout from '../components/AstroReadout.astro';
+import { Code } from 'astro:components';
+import '../styles/global.css';
+
+const storeExample = `import { atom, computed } from 'nanostores';
+
+export const count = atom(0);
+export const doubled = computed(count, value => value * 2);
+
+count.set(count.get() + 1);`;
+
+const reactExample = `import { useStore } from '@nanostores/react';
+import { count } from '../stores/playground';
+
+const currentCount = useStore(count);`;
+
+const svelteExample = `<script>
+  import { count } from '../stores/playground';
+</script>
+
+<output>{$count}</output>`;
+
+const browserExample = `import { count } from '../stores/playground';
+
+const unsubscribe = count.subscribe(value => {
+  output.textContent = String(value);
+});
+
+// Call unsubscribe() when the element is removed.`;
 ---
 
 <!doctype html>
@@ -13,12 +42,22 @@ import AlpineCard from '../components/AlpineCard.astro';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Six frontend frameworks sharing state with Nano Stores in Astro." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Six frameworks, one store</title>
   </head>
   <body>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Nano Stores playground home"><span class="brand-mark" aria-hidden="true">n</span>island playground</a>
+      <a href="https://github.com/nanostores/nanostores">Nano Stores docs</a>
+    </header>
     <main>
-      <h1>Six frameworks, one store</h1>
-      <p>An Astro playground for shared state with Nano Stores.</p>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">ASTRO + NANO STORES</p>
+        <h1 id="page-title">Six frameworks.<br /><span>One shared state.</span></h1>
+        <p class="intro-description">Type in Vue. Count in Svelte. Pick a color in React.<br class="desktop-break" /> Every island stays in sync.</p>
+        <div class="intro-note"><span>One browser. One source of truth.</span><span>Try any card below.</span></div>
+      </section>
+      <noscript><p class="noscript-notice">Enable JavaScript to try the shared controls. Each framework runs independently in your browser.</p></noscript>
       <section class="framework-grid" aria-label="Framework playground">
         <ReactCard client:load />
         <VueCard client:load />
@@ -27,6 +66,34 @@ import AlpineCard from '../components/AlpineCard.astro';
         <SolidCard client:load />
         <AlpineCard />
       </section>
+      <AstroReadout />
+      <details class="code-examples">
+        <summary>How it works <span>Small stores. Native subscriptions.</span></summary>
+        <p>Each island imports the same store module. Updating an atom notifies its subscribers across framework boundaries. Computed stores derive new values from that state.</p>
+        <div class="code-grid">
+          <section>
+            <h2>Define state once</h2>
+            <Code code={storeExample} lang="ts" theme="github-light" />
+          </section>
+          <section>
+            <h2>Read it in React</h2>
+            <Code code={reactExample} lang="tsx" theme="github-light" />
+          </section>
+          <section>
+            <h2>Use Svelte's store contract</h2>
+            <Code code={svelteExample} lang="svelte" theme="github-light" />
+          </section>
+          <section>
+            <h2>Subscribe with plain JavaScript</h2>
+            <Code code={browserExample} lang="ts" theme="github-light" />
+          </section>
+        </div>
+        <p>Preact, Vue and Solid use their Nano Stores adapters. Alpine uses the same subscribe() API as the Astro readout. The source keeps each card separate so you can compare the implementations.</p>
+      </details>
     </main>
+    <footer class="site-footer">
+      <p>Built with Astro islands and Nano Stores. Reload to start fresh.</p>
+      <a href="https://docs.astro.build/en/recipes/sharing-state-islands/">About shared state in Astro</a>
+    </footer>
   </body>
 </html>

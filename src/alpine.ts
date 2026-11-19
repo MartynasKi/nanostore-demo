@@ -1,5 +1,13 @@
 import type { Alpine } from 'alpinejs';
-import { accent, changeAccent, changeCount, changeMessage, count, message, type Accent } from './stores/playground';
+import {
+  accent,
+  changeAccent,
+  changeCount,
+  changeMessage,
+  count,
+  message,
+  type Accent,
+} from './stores/playground';
 
 export default function setupAlpine(Alpine: Alpine) {
   Alpine.data('playground', () => ({
@@ -10,9 +18,15 @@ export default function setupAlpine(Alpine: Alpine) {
 
     init() {
       this.subscriptions = [
-        count.subscribe((value) => { this.count = value; }),
-        message.subscribe((value) => { this.message = value; }),
-        accent.subscribe((value) => { this.accent = value; }),
+        count.subscribe((value) => {
+          this.count = value;
+        }),
+        message.subscribe((value) => {
+          this.message = value;
+        }),
+        accent.subscribe((value) => {
+          this.accent = value;
+        }),
       ];
     },
 

@@ -1,0 +1,46 @@
+---
+import { lastChange, summary } from '../stores/playground';
+---
+
+<astro-readout class="readout" data-accent="blue">
+  <div class="readout-heading">
+    <div>
+      <p class="eyebrow">THE SAME STATE, PLAIN JAVASCRIPT</p>
+      <h2>Astro is listening too.</h2>
+    </div>
+    <span class="framework-badge astro">Astro + browser script</span>
+  </div>
+  <p class="computed-summary" data-summary>{summary.get()}</p>
+  <div class="readout-footer">
+    <p data-last-change role="status">{lastChange.get()}</p>
+    <button type="button" class="reset-button">Reset playground</button>
+  </div>
+</astro-readout>
+
+<script>
+  import { accent, lastChange, reset, summary } from '../stores/playground';
+
+  // The custom element cleans up subscriptions if it leaves the page.
+  class AstroReadout extends HTMLElement {
+    private subscriptions: (() => void)[] = [];
+
+    connectedCallback() {
+      const summaryText = this.querySelector<HTMLElement>('[data-summary]')!;
+      const changeText = this.querySelector<HTMLElement>('[data-last-change]')!;
+
+      this.subscriptions = [
+        summary.subscribe((value) => { summaryText.textContent = value; }),
+        lastChange.subscribe((value) => { changeText.textContent = value; }),
+        accent.subscribe((value) => { this.dataset.accent = value; }),
+      ];
+      this.querySelector('button')!.addEventListener('click', reset);
+    }
+
+    disconnectedCallback() {
+      this.subscriptions.forEach((unsubscribe) => unsubscribe());
+      this.querySelector('button')!.removeEventListener('click', reset);
+    }
+  }
+
+  customElements.define('astro-readout', AstroReadout);
+</script>

@@ -8,8 +8,10 @@ export const message = atom('Hello islands');
 export const accent = atom<Accent>('blue');
 export const lastChange = atom('No changes yet. Try any card.');
 
-export const summary = computed([count, message], (value, text) =>
-  `${text || '(empty message)'} · count ${value} · doubled ${value * 2}`,
+export const summary = computed(
+  [count, message],
+  (value, text) =>
+    `${text || '(empty message)'} · count ${value} · doubled ${value * 2}`,
 );
 
 export function changeCount(amount: number, framework: string) {
