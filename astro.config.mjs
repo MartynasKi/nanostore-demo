@@ -15,4 +15,15 @@ export default defineConfig({
     svelte(),
     vue(),
   ],
+  vite: {
+    plugins: [
+      {
+        name: 'disable-oxc-react-refresh',
+        enforce: 'post',
+        // Vue inherits React refresh settings during TypeScript compilation.
+        // Remove this workaround once vite-plugin-vue#798 is fixed.
+        config: () => ({ oxc: { jsx: { refresh: false } } }),
+      },
+    ],
+  },
 });

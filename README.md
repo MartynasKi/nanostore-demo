@@ -51,6 +51,8 @@ Astro templates render initial HTML. The readout reacts through a browser script
 
 TypeScript stays on version 6 because the installed Astro and Svelte checkers do not support version 7 yet. The pnpm lockfile records the installed dependency versions.
 
+The Vite config disables React Fast Refresh to work around [Vue plugin issue #798](https://github.com/vitejs/vite-plugin-vue/issues/798). Without it, Vue's TypeScript compilation inherits React refresh settings and crashes on `useStore()` in development. This workaround does not change production behavior. React edits may require a page reload.
+
 This project intentionally loads six framework runtimes to demonstrate interoperability. A typical Astro project can use fewer frameworks.
 
 ## Learn more
