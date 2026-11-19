@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "nanostore-demo",
+  "compatibility_date": "2026-11-19",
+  "workers_dev": false,
+  "preview_urls": false,
+  "build": {
+    "command": "pnpm build"
+  },
+  "assets": {
+    "directory": "./dist"
+  },
+  "routes": [
+    {
+      "pattern": "nanostore-demo.martynaski.dev",
+      "custom_domain": true
+    }
+  ]
+}

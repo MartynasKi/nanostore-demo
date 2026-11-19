@@ -10,7 +10,8 @@
     "dev": "astro dev",
     "check": "astro check && vue-tsc --noEmit -p tsconfig.vue.json && svelte-check --tsconfig ./tsconfig.json",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
@@ -19,7 +20,8 @@
     "@types/react-dom": "^19.3.0",
     "svelte-check": "^4.7.8",
     "typescript": "^6.0.3",
-    "vue-tsc": "^3.3.14"
+    "vue-tsc": "^3.3.14",
+    "wrangler": "^4.164.0"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^1.0.0",

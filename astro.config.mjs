@@ -7,6 +7,8 @@ import svelte from '@astrojs/svelte';
 import vue from '@astrojs/vue';
 
 export default defineConfig({
+  site: 'https://nanostore-demo.martynaski.dev',
+  output: 'static',
   devToolbar: { enabled: false },
   integrations: [
     alpine({ entrypoint: '/src/alpine.ts' }),

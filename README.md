@@ -2,6 +2,8 @@
 
 A small Astro page where React, Preact, Vue, Svelte, SolidJS and AlpineJS share state through Nano Stores. Each framework has its own card with the same controls.
 
+Demo URL: [nanostore-demo.martynaski.dev](https://nanostore-demo.martynaski.dev).
+
 ## Run locally
 
 Use Node.js 22.23.4 or newer and pnpm 12.
