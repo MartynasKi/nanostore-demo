@@ -7,6 +7,7 @@ import svelte from '@astrojs/svelte';
 import vue from '@astrojs/vue';
 
 export default defineConfig({
+  devToolbar: { enabled: false },
   integrations: [
     alpine({ entrypoint: '/src/alpine.ts' }),
     preact({ include: ['**/preact/**'] }),
