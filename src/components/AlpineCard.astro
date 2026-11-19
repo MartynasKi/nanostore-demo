@@ -1,0 +1,26 @@
+---
+import { colors } from '../stores/playground';
+---
+
+<article class="framework-card" data-framework="AlpineJS" data-accent="blue" x-data="playground" x-bind:data-accent="accent">
+  <header class="card-header">
+    <h2>AlpineJS</h2>
+    <span class="framework-badge alpine">Alpine</span>
+  </header>
+  <p class="subscription">subscribe() with Alpine.data()</p>
+  <div class="counter">
+    <button type="button" aria-label="Decrease counter" x-on:click="changeCount(-1)">−</button>
+    <output class="count" aria-label="Shared count" x-text="count">0</output>
+    <button type="button" aria-label="Increase counter" x-on:click="changeCount(1)">+</button>
+  </div>
+  <label for="alpine-message">Shared message</label>
+  <input id="alpine-message" value="Hello islands" x-bind:value="message" x-on:input="changeMessage($event.target.value)" />
+  <p class="message-preview" x-text="message || '(empty message)'">Hello islands</p>
+  <div class="accent-options" role="group" aria-label="Shared accent">
+    {colors.map((color) => (
+      <button type="button" data-color={color} aria-label={`Use ${color} accent`} aria-pressed={color === 'blue'} x-bind:aria-pressed={`accent === '${color}'`} x-on:click={`changeAccent('${color}')`}>
+        <span class="swatch" aria-hidden="true"></span>{color}
+      </button>
+    ))}
+  </div>
+</article>

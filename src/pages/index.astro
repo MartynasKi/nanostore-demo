@@ -1,3 +1,12 @@
+---
+import ReactCard from '../components/react/ReactCard';
+import PreactCard from '../components/preact/PreactCard';
+import SolidCard from '../components/solid/SolidCard';
+import VueCard from '../components/VueCard.vue';
+import SvelteCard from '../components/SvelteCard.svelte';
+import AlpineCard from '../components/AlpineCard.astro';
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,6 +19,14 @@
     <main>
       <h1>Six frameworks, one store</h1>
       <p>An Astro playground for shared state with Nano Stores.</p>
+      <section class="framework-grid" aria-label="Framework playground">
+        <ReactCard client:load />
+        <VueCard client:load />
+        <SvelteCard client:load />
+        <PreactCard client:load />
+        <SolidCard client:load />
+        <AlpineCard />
+      </section>
     </main>
   </body>
 </html>
