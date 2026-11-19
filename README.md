@@ -1,5 +1,7 @@
 # Six frameworks, one store
 
+<img width="1452" height="821" alt="image" src="https://github.com/user-attachments/assets/0b01b53b-0c6c-462c-b91f-0044f5947540" />
+
 A small Astro page where React, Preact, Vue, Svelte, SolidJS and AlpineJS share state through Nano Stores. Each framework has its own card with the same controls.
 
 Demo URL: [nanostore-demo.martynaski.dev](https://nanostore-demo.martynaski.dev).
